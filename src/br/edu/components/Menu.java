@@ -1,10 +1,13 @@
-package br.edu;
+package br.edu.components;
 
+import br.edu.models.Cadastro;
 import br.edu.models.Fisica;
 import br.edu.models.Juridica;
 import br.edu.models.Pessoa;
 
-public class Main {
+import javax.swing.*;
+
+public class Menu extends JFrame implements Cadastro {
     public static void main(String[] args) {
 
         // implementar interface grafica
@@ -17,5 +20,25 @@ public class Main {
         Pessoa pessoaJuridica = new Juridica();
         pessoaJuridica.setNome("pessoa2");
         System.out.println(pessoaJuridica.getNome());
+    }
+
+    @Override
+    public void cadastrar() {
+
+    }
+
+    @Override
+    public void editar() {
+
+    }
+
+    @Override
+    public void remover() {
+
+    }
+
+    @Override
+    public void listarRegistros(boolean isCPF) {
+
     }
 }
