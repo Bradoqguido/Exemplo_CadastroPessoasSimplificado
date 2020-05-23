@@ -73,12 +73,10 @@
           </grid>
         </children>
       </grid>
-      <grid id="63da7" layout-manager="BorderLayout" hgap="0" vgap="0">
-        <constraints border-constraint="South"/>
+      <component id="e900" class="javax.swing.JTextArea" binding="txtRegistros">
+        <constraints border-constraint="Center"/>
         <properties/>
-        <border type="none"/>
-        <children/>
-      </grid>
+      </component>
     </children>
   </grid>
 </form>

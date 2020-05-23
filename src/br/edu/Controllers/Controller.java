@@ -13,12 +13,16 @@ public class Controller implements Validadores {
 
     private List<Pessoa> pessoas = new ArrayList<>();
 
-    public void inserirRegistro(String nome, String documento, boolean isCpf) {
-        if (isCpf) {
-            pessoas.add(new Fisica(nome, documento));
-        } else {
-            pessoas.add(new Juridica(nome, documento));
-        }
+    public void inserirRegistroComCPF(String nome, String documento) {
+        pessoas.add(new Fisica(nome, documento));
+    }
+
+    public void inserirRegistroComCNPJ(String nome, String documento) {
+        pessoas.add(new Juridica(nome, documento));
+    }
+
+    public List getPessoas() {
+        return pessoas;
     }
 
     @Override

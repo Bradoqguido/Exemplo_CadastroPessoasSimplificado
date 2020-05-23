@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FrmMenu extends JFrame {
 
@@ -23,7 +25,7 @@ public class FrmMenu extends JFrame {
     private JButton btnAddRegistro;
     private JRadioButton btnRadioCPF;
     private JRadioButton btnRadioCNPJ;
-    private JList lstRegistros;
+    private JTextArea txtRegistros;
 
     private Controller controller;
 
@@ -69,6 +71,9 @@ public class FrmMenu extends JFrame {
 
         getContentPane().add(pnlFields, BorderLayout.NORTH);
 
+        txtRegistros = new JTextArea();
+        getContentPane().add(txtRegistros, BorderLayout.CENTER);
+
         setSize(500, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -79,27 +84,66 @@ public class FrmMenu extends JFrame {
         btnRadioCNPJ.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 btnRadioCPF.setSelected(false);
+                listarRegistrosDeCPF();
             }
         });
 
         btnRadioCPF.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 btnRadioCNPJ.setSelected(false);
+                listarRegistrosDeCNPJ();
             }
         });
 
         btnAddRegistro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controller.inserirRegistro(txtNome.getText(), txtDocumento.getText(), btnRadioCPF.isSelected());
+                if (btnRadioCPF.isSelected()) {
+                    if (controller.validarCPF(txtDocumento.getText())) {
+                        controller.inserirRegistroComCPF(txtNome.getText(), txtDocumento.getText());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "CPF inválido!");
+                    }
+                    listarRegistrosDeCPF();
+                }
+
+                if (btnRadioCNPJ.isSelected()) {
+                    if (controller.validarCNPJ(txtDocumento.getText())) {
+                        controller.inserirRegistroComCNPJ(txtNome.getText(), txtDocumento.getText());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "CNPJ inválido!");
+                    }
+                    listarRegistrosDeCNPJ();
+                }
 
                 txtNome.setText("");
                 txtDocumento.setText("");
-                btnRadioCPF.setSelected(false);
             }
         });
     }
 
-    private void listarRegistrosDeCPF() {}
+    private void listarRegistrosDeCPF() {
+        txtRegistros.setText("");
+        List<Fisica> pessoas = controller.getPessoas();
+        StringBuilder stbPessoas = new StringBuilder();
 
-    private void listarRegistrosDeCNPJ() {}
+        for (Fisica pessoa : pessoas) {
+            stbPessoas.append("\nNome:")
+                    .append(pessoa.getNome())
+                    .append(" - CPF: ").append(pessoa.getCPF());
+        }
+        txtRegistros.setText(stbPessoas.toString());
+    }
+
+    private void listarRegistrosDeCNPJ() {
+        txtRegistros.setText("");
+        List<Juridica> pessoas = controller.getPessoas();
+        StringBuilder stbPessoas = new StringBuilder();
+
+        for (Juridica pessoa : pessoas) {
+            stbPessoas.append("\nNome:")
+                    .append(pessoa.getNome())
+                    .append(" - CNPJ: ").append(pessoa.getCNPJ());
+        }
+        txtRegistros.setText(stbPessoas.toString());
+    }
 }
