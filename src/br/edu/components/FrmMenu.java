@@ -62,6 +62,7 @@ public class FrmMenu extends JFrame {
 
         pnlActions = new JPanel(new BorderLayout(0,0));
             btnRadioCPF = new JRadioButton("CPF");
+            btnRadioCPF.setSelected(true);
             pnlActions.add(btnRadioCPF, BorderLayout.WEST);
             btnRadioCNPJ = new JRadioButton("CNPJ");
             pnlActions.add(btnRadioCNPJ, BorderLayout.CENTER);
@@ -123,11 +124,11 @@ public class FrmMenu extends JFrame {
 
     private void listarRegistrosDeCPF() {
         txtRegistros.setText("");
-        List<Fisica> pessoas = controller.getPessoas();
+        List<Fisica> pessoas = controller.getPessoasComCPF();
         StringBuilder stbPessoas = new StringBuilder();
 
         for (Fisica pessoa : pessoas) {
-            stbPessoas.append("\nNome:")
+            stbPessoas.append("\nNome: ")
                     .append(pessoa.getNome())
                     .append(" - CPF: ").append(pessoa.getCPF());
         }
@@ -136,11 +137,11 @@ public class FrmMenu extends JFrame {
 
     private void listarRegistrosDeCNPJ() {
         txtRegistros.setText("");
-        List<Juridica> pessoas = controller.getPessoas();
+        List<Juridica> pessoas = controller.getPessoasComCNPJ();
         StringBuilder stbPessoas = new StringBuilder();
 
         for (Juridica pessoa : pessoas) {
-            stbPessoas.append("\nNome:")
+            stbPessoas.append("\nNome: ")
                     .append(pessoa.getNome())
                     .append(" - CNPJ: ").append(pessoa.getCNPJ());
         }

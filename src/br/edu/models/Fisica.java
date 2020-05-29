@@ -22,11 +22,6 @@ public class Fisica extends Pessoa {
     }
 
     @Override
-    public void setNome(String pNome) {
-        this.strNome = pNome;
-    }
-
-    @Override
     public String getNome() {
         return this.strNome;
     }

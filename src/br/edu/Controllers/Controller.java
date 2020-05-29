@@ -11,18 +11,22 @@ import java.util.List;
 
 public class Controller implements Validadores {
 
-    private List<Pessoa> pessoas = new ArrayList<>();
+    private List<Pessoa> peopleCPF = new ArrayList<>();
+    private List<Pessoa> peopleCNPJ = new ArrayList<>();
 
     public void inserirRegistroComCPF(String nome, String documento) {
-        pessoas.add(new Fisica(nome, documento));
+        peopleCPF.add(new Fisica(nome, documento));
     }
 
     public void inserirRegistroComCNPJ(String nome, String documento) {
-        pessoas.add(new Juridica(nome, documento));
+        peopleCNPJ.add(new Juridica(nome, documento));
     }
 
-    public List getPessoas() {
-        return pessoas;
+    public List getPessoasComCPF() {
+        return peopleCPF;
+    }
+    public List getPessoasComCNPJ() {
+        return peopleCNPJ;
     }
 
     @Override
